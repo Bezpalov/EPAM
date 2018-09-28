@@ -2,7 +2,7 @@ package com.learning.strings.revert;
 
 class Revert {
     public static String revertSentence(String str) throws IllegalArgumentException {
-        if( str == null) {
+        if (str == null) {
             throw new IllegalArgumentException("where is the string?");
         }
         StringBuilder temp = new StringBuilder();
@@ -13,7 +13,7 @@ class Revert {
 
         for (int i = 0; i < modificatedString.length(); i++) {
             temp.append(modificatedString.charAt(i));
-            if(modificatedString.charAt(i) == ' ' || i == modificatedString.length() - 1) {
+            if (modificatedString.charAt(i) == ' ' || i == modificatedString.length() - 1) {
                 result.append(temp.reverse());
                 temp.delete(0, temp.length());
                 continue;
