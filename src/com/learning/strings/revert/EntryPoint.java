@@ -16,7 +16,6 @@ public class EntryPoint {
                 if (sentence.equals("-1")) {
                     break;
                 }
-
                 System.out.println(Revert.revertSentence(sentence));
             } catch (IOException e) {
                 e.getStackTrace();
