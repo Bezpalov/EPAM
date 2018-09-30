@@ -45,13 +45,22 @@ class Task {
         int count = 0;
         char current;
         char next;
+        boolean isNotFirst = false;
 
         for (int i = 0; i < str.length() - 1; i++) {
             current = str.charAt(i);
             next = str.charAt(i + 1);
             if (current == next) {
-                count++;
+               if(!isNotFirst) {
+                   count = count + 2;
+                   isNotFirst = true;
+                   continue;
+               } else {
+                   count++;
+                   continue;
+               }
             }
+            isNotFirst = false;
         }
         return count;
     }
