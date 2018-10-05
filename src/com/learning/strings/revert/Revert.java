@@ -1,9 +1,9 @@
 package com.learning.strings.revert;
 
 class Revert {
-    public static String revertSentence(String str) throws IllegalArgumentException {
+    public static String revertSentence(String str) {
         if (str == null) {
-            throw new IllegalArgumentException("where is the string?");
+            return "";
         }
         StringBuilder temp = new StringBuilder();
         StringBuilder result = new StringBuilder();

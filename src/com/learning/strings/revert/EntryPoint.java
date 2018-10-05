@@ -21,5 +21,11 @@ public class EntryPoint {
                 e.getStackTrace();
             }
         }
+
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

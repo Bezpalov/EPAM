@@ -27,15 +27,34 @@ public class EntryPoint {
                 sentence = reader.readLine();
 
                 System.out.println("word is " + word.toUpperCase());
-                System.out.println("third symbol is " + task.getThirdSymbol(word).toUpperCase());
-                System.out.println("last symbol is " + task.getLastSymbol(word).toUpperCase());
-                System.out.println(index + " symbol in the word " + word.toUpperCase() + " is " + task.getSpecificSymbol(word, index).toUpperCase());
-                System.out.println("change 2 and 5 symbol: " + task.changeLettersSpot(word));
-                System.out.println("Quantity of equals letter in " + sentence.toUpperCase() + " is " + task.getQuantityOfEqualsLetters(sentence));
+
+                try {
+                    System.out.println("third symbol is " + task.getThirdSymbol(word).toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    System.err.println(e.getMessage());
+                }
+                try {
+                    System.out.println("last symbol is " + task.getLastSymbol(word).toUpperCase());
+                } catch (NullPointerException | IllegalArgumentException e) {
+                    System.err.println(e.getMessage());
+                }
+                try {
+                    System.out.println(index + " symbol in the word " + word.toUpperCase() + " is " + task.getSpecificSymbol(word, index).toUpperCase());
+                } catch (NullPointerException | IllegalArgumentException e) {
+                    System.err.println(e.getMessage());
+                }
+                try {
+                    System.out.println("change 2 and 5 symbol: " + task.changeLettersSpot(word));
+                }catch (NullPointerException | IllegalArgumentException e){
+                    System.err.println(e.getMessage());
+                }
+                try {
+                    System.out.println("Quantity of equals letter in " + sentence.toUpperCase() + " is " + task.getQuantityOfEqualsLetters(sentence));
+                }catch (NullPointerException e){
+                    System.err.println(e.getMessage());
+                }
             } catch (IOException e) {
                 e.getStackTrace();
-            } catch (IllegalArgumentException e) {
-                System.err.println(e.getMessage());
             }
         }
 
