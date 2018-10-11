@@ -7,12 +7,12 @@ public class Task12273 {
             throw new IllegalArgumentException("reference to null is not acceptable");
         }
 
-        StringBuilder result = new StringBuilder("Even words is ");
+        StringBuilder result = new StringBuilder("Even words is: ");
         for (int i = 0; i < array[0].length; i++) {
             for (int j = 0; j < array[i].length; j = j + 2) {
                 result.append(array[i][j]);
             }
-            result.append(" ").append("\n");
+            result.append(" ");
         }
         return result;
     }

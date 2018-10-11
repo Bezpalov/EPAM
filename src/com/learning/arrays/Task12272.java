@@ -11,7 +11,7 @@ public class Task12272 {
 
         char[] result = new char[list.size()];
         int i = 0;
-        for (Character character: list) {
+        for (Character character : list) {
             result[i] = character;
             i++;
         }
@@ -44,8 +44,7 @@ public class Task12272 {
         }
         StringBuilder result = new StringBuilder("left to right word is ");
         char[] temp = listToArray(list);
-        return result.append(list.toArray()).append("\n");
-        //return result.append(temp);
+        return result.append(temp).append("\n");
     }
 
     public StringBuilder getUpToDown(char[][] array) {
@@ -73,7 +72,6 @@ public class Task12272 {
         }
         StringBuilder result = new StringBuilder("up to down word is ");
         char[] temp = listToArray(list);
-        return result.append(list.toArray()).append("\n");
-//        return new String(list.toArray().toString());
+        return result.append(temp).append("\n");
     }
 }
