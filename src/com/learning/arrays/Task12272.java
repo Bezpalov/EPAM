@@ -1,11 +1,25 @@
 package com.learning.arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Task12272 {
 
-    public String getLeftToRigth(char[][] array) {
+    public static char[] listToArray(List<Character> list) {
+
+        char[] result = new char[list.size()];
+        int i = 0;
+        for (Character character: list) {
+            result[i] = character;
+            i++;
+        }
+        return result;
+    }
+
+
+    public StringBuilder getLeftToRigth(char[][] array) {
         if (array == null) {
             throw new IllegalArgumentException("reference to null is not acceptable");
         } else if (array.length < 2 || array[0].length < 2 || array[array.length - 1].length < 2) {
@@ -28,10 +42,13 @@ public class Task12272 {
                 list.add(array[j][i]);
             }
         }
-        return new String(list.toArray().toString());
+        StringBuilder result = new StringBuilder("left to right word is ");
+        char[] temp = listToArray(list);
+        return result.append(list.toArray()).append("\n");
+        //return result.append(temp);
     }
 
-    public String getUpToDown(char[][] array) {
+    public StringBuilder getUpToDown(char[][] array) {
         if (array == null) {
             throw new IllegalArgumentException("reference to null is not acceptable");
         } else if (array.length < 2 || array[0].length < 2 || array[array.length - 1].length < 2) {
@@ -54,6 +71,9 @@ public class Task12272 {
                 list.add(array[i][j]);
             }
         }
-        return new String(list.toArray().toString());
+        StringBuilder result = new StringBuilder("up to down word is ");
+        char[] temp = listToArray(list);
+        return result.append(list.toArray()).append("\n");
+//        return new String(list.toArray().toString());
     }
 }

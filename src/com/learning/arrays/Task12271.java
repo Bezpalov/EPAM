@@ -1,35 +1,25 @@
 package com.learning.arrays;
 
 public class Task12271 {
-    private Integer min = Integer.MAX_VALUE;
-    private Integer max = Integer.MIN_VALUE;
 
-    private void getMinAndMax(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            if (min > arr[i]) {
-                min = arr[i];
-            }
-            if (max < arr[i]) {
-                max = arr[i];
-            }
-        }
-    }
 
-    public String getWord(char[][] array, int numOfLine, int... numbers) {
-        if (array == null || numbers == null) {
+    public StringBuilder getWord(char[][] array, int numOfLine, int begin, int end) {
+        if (array == null) {
             throw new IllegalArgumentException("reference to null is not acceptable");
         } else if (numOfLine >= array.length || numOfLine < 0) {
             throw new IllegalArgumentException("invalid number of line, should be positive and less than array length ");
-        }
-        getMinAndMax(numbers);
-        if (array[numOfLine].length <= max || min < 0) {
-            throw new IllegalArgumentException("invalid indexes: " + min + ", " + max);
+        } else if (begin < 0 || end > array[numOfLine].length) {
+            throw new IllegalArgumentException("indexes are out of array borders");
+        } else if (begin > end) {
+            throw new IllegalArgumentException("begin index should be less than end index");
         }
 
-        char[] chars = new char[numbers.length];
-        for (int i = 0; i < numbers.length; i++) {
-            chars[i] = array[numOfLine][numbers[i]];
+        StringBuilder result = new StringBuilder("a substring from " + numOfLine + " string is ");
+        int length = end - begin + 1;
+        char[] chars = new char[length];
+        for (int i = begin, j = 0; i <= end; i++, j++) {
+            chars[j] = array[i][numOfLine];
         }
-        return new String(chars);
+        return result.append(chars).append("\n");
     }
 }
