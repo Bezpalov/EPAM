@@ -1,4 +1,4 @@
-package com.learning.arrays;
+package main.com.learning.arrays;
 
 public class Task12270 {
 
@@ -14,6 +14,6 @@ public class Task12270 {
                 array[0][array[0].length - 1],
                 array[array.length - 1][0],
                 array[array.length - 1][array[array.length - 1].length - 1]};
-        return result.append(answer).append("\n");
+        return result.append(answer);
     }
 }

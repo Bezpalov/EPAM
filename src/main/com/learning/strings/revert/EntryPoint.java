@@ -1,4 +1,4 @@
-package com.learning.strings.revert;
+package main.com.learning.strings.revert;
 
 import java.io.BufferedReader;
 import java.io.IOException;

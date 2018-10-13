@@ -1,4 +1,4 @@
-package com.learning.strings.revert;
+package main.com.learning.strings.revert;
 
 class Revert {
     public static String revertSentence(String str) {

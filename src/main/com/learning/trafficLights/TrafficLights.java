@@ -1,4 +1,4 @@
-package com.learning.trafficLights;
+package main.com.learning.trafficLights;
 
 import java.io.BufferedReader;
 import java.io.IOException;

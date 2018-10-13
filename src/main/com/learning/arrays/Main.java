@@ -1,4 +1,4 @@
-package com.learning.arrays;
+package main.com.learning.arrays;
 
 public class Main {
 

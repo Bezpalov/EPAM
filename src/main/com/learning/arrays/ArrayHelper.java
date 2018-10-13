@@ -1,4 +1,4 @@
-package com.learning.arrays;
+package main.com.learning.arrays;
 
 public class ArrayHelper {
 
@@ -23,37 +23,39 @@ public class ArrayHelper {
     }
 
     public String execute(char[][] array) {
-
+        if (array == null) {
+            throw new IllegalArgumentException("Null is unacceptable");
+        }
         showArray(array);
         System.out.println();
 
         StringBuilder result = new StringBuilder();
         try {
-            result.append(new Task12270().getCorners(array));
+            result.append(new Task12270().getCorners(array)).append("\n");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
         try {
             int numLine = (int) (Math.round(Math.random() * 5));
-            int begin = (int) (Math.round(Math.random() * 4));
-            int end = (int) (Math.round(Math.random() * 4));
-            result.append(new Task12271().getWord(array, numLine, begin, end));
+            int begin = (int) (Math.round(Math.random() * 2));
+            int end = 2 + (int) (Math.round(Math.random() * 2));
+            result.append(new Task12271().getWord(array, numLine, begin, end)).append("\n");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
         try {
-            result.append(new Task12272().getLeftToRigth(array));
-            result.append(new Task12272().getUpToDown(array));
+            result.append(new Task12272().getLeftToRigth(array)).append("\n");
+            result.append(new Task12272().getUpToDown(array)).append("\n");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
         try {
-            result.append(new Task12273().getEvenWords(array));
+            result.append(new Task12273().getEvenWords(array)).append("\n");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
         try {
-            result.append(new Task12274().getOddWords(array));
+            result.append(new Task12274().getOddWords(array)).append("\n");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }

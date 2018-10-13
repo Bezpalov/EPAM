@@ -1,4 +1,4 @@
-package com.learning.strings.zlatopolskiy;
+package main.com.learning.strings.zlatopolskiy;
 
 class Task {
 

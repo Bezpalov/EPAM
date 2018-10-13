@@ -1,13 +1,14 @@
-package com.learning.arrays;
+package main.com.learning.arrays;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Task12272 {
 
     public static char[] listToArray(List<Character> list) {
+        if (list == null) {
+            throw new IllegalArgumentException("reference to null is not acceptable");
+        }
 
         char[] result = new char[list.size()];
         int i = 0;
@@ -39,12 +40,12 @@ public class Task12272 {
             }
 
             for (int j = begin; j < array[i].length; j = j + 2) {
-                list.add(array[j][i]);
+                list.add(array[i][j]);
             }
         }
         StringBuilder result = new StringBuilder("left to right word is ");
         char[] temp = listToArray(list);
-        return result.append(temp).append("\n");
+        return result.append(temp);
     }
 
     public StringBuilder getUpToDown(char[][] array) {
@@ -67,11 +68,11 @@ public class Task12272 {
             }
 
             for (int j = begin; j < array[i].length; j = j + 2) {
-                list.add(array[i][j]);
+                list.add(array[j][i]);
             }
         }
         StringBuilder result = new StringBuilder("up to down word is ");
         char[] temp = listToArray(list);
-        return result.append(temp).append("\n");
+        return result.append(temp);
     }
 }
