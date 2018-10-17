@@ -1,10 +1,24 @@
 package main.com.learning.recursion;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(new Factorial().getFactorial(5));
-        System.out.println(new Pow().getPowOfNumber(2,3));
-        System.out.println(new QuantityOfDigitsOfNaturalNumber().getQuantityOfDigitsOfNaturalNumber(12356));
-        System.out.println(new SumOfNaturalNumber().getSumOfNaturalNumber(12345));
+        System.out.println(new Main().executeAll());
+    }
+
+    public StringBuilder executeAll() {
+        Executable factorial = new Factorial();
+        Executable pow = new Pow();
+        Executable quantityOfDigitsOfNaturalNumber = new QuantityOfDigitsOfNaturalNumber();
+        Executable sumOfNaturalNumber = new SumOfNaturalNumber();
+        StringBuilder result = new StringBuilder();
+
+        List<Executable> execution = Arrays.asList(factorial, pow, quantityOfDigitsOfNaturalNumber, sumOfNaturalNumber);
+        for (Executable ex: execution ) {
+            result.append(ex.execute());
+        }
+        return result;
     }
 }
