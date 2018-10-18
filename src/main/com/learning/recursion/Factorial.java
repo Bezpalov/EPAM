@@ -29,16 +29,26 @@ public class Factorial implements Executable {
         return new BigInteger(number.toString()).multiply(getFactorial((number - 1)));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public StringBuilder execute() {
         try {
+            StringBuilder result = new StringBuilder("factorial of number ");
             long number = Executable.getRandomPositiveNumber();
-            StringBuilder result = new StringBuilder("factorial of number ").append(number).
-                    append(" is ");
-            result.append(getFactorial(number));
-            return null;
-        }catch (StackOverflowError e) {
-            System.out.println("There is too ");
+            result.append(number)
+                    .append(" is ")
+                    .append(getFactorial(number))
+                    .append("\n");
+            return result;
+        } catch (StackOverflowError e) {
+            System.err.println("Error in getFactorial: There is too much depth for this algorithm ");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error in getFactorial: " + e.getMessage());
         }
+        return new StringBuilder("");
     }
 }
+

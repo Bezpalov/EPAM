@@ -32,8 +32,27 @@ public class Pow implements Executable{
         return temp.multiply(getPowOfNumber(number, pow - 1));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public StringBuilder execute() {
-        return null;
+        try {
+            long number = Executable.getRandomNumber();
+            long pow = Executable.getRandomPositiveNumber();
+            StringBuilder result = new StringBuilder(Long.toString(number));
+            result.append(" raised to a power ")
+                    .append(Long.toString(pow))
+                    .append(" is ")
+                    .append(getPowOfNumber(number, pow))
+                    .append("\n");
+            return result;
+        } catch (StackOverflowError e) {
+            System.err.println("Error in getFactorial: There is too much depth for this algorithm ");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error in getPow: " + e.getMessage());
+        }
+        return new StringBuilder("");
     }
 }

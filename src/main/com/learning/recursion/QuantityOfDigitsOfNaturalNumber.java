@@ -26,8 +26,25 @@ public class QuantityOfDigitsOfNaturalNumber implements Executable {
         return 1 + getQuantityOfDigitsOfNaturalNumber(number / 10);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public StringBuilder execute() {
-        return null;
+        try {
+            long number = Executable.getRandomPositiveNumber();
+            StringBuilder result = new StringBuilder("Quantity of digits of natural number ")
+                    .append(Long.toString(number))
+                    .append(" is ")
+                    .append(getQuantityOfDigitsOfNaturalNumber(number))
+                    .append("\n");
+            return result;
+        } catch (StackOverflowError e) {
+            System.err.println("Error in getFactorial: There is too much depth for this algorithm ");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error in getQuantityOfNaturalNumber: " + e.getMessage());
+        }
+        return new StringBuilder("");
     }
 }

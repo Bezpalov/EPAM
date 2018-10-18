@@ -20,8 +20,25 @@ public class SumOfNaturalNumber implements Executable {
         return (number % 10) + getSumOfNaturalNumber(number / 10);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public StringBuilder execute() {
-        return null;
+        try {
+            long number = Executable.getRandomPositiveNumber();
+            StringBuilder result = new StringBuilder("Sum of digits of natural number ")
+                    .append(Long.toString(number))
+                    .append(" is ")
+                    .append(getSumOfNaturalNumber(number))
+                    .append("\n");
+            return result;
+        } catch (StackOverflowError e) {
+            System.err.println("Error in getFactorial: There is too much depth for this algorithm ");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error in getSumOfNaturalNumber: " + e.getMessage());
+        }
+        return new StringBuilder("");
     }
 }
