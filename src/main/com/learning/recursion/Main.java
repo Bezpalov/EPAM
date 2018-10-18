@@ -8,6 +8,10 @@ public class Main {
         System.out.println(new Main().executeAll());
     }
 
+    /**
+     *
+     * @return Pull out information about all executed methods
+     */
     public StringBuilder executeAll() {
         Executable factorial = new Factorial();
         Executable pow = new Pow();
@@ -16,7 +20,7 @@ public class Main {
         StringBuilder result = new StringBuilder();
 
         List<Executable> execution = Arrays.asList(factorial, pow, quantityOfDigitsOfNaturalNumber, sumOfNaturalNumber);
-        for (Executable ex: execution ) {
+        for (Executable ex : execution) {
             result.append(ex.execute());
         }
         return result;

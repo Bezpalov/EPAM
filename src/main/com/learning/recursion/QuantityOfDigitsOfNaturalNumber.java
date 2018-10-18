@@ -27,8 +27,9 @@ public class QuantityOfDigitsOfNaturalNumber implements Executable {
     }
 
     /**
+     * Realization of interface method execute. Pull out all information through StringBuilder object
      *
-     * @return
+     * @return answer about quantity of digits of some natural number
      */
     @Override
     public StringBuilder execute() {

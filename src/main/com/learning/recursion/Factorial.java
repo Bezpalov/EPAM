@@ -1,7 +1,6 @@
 package main.com.learning.recursion;
 
 import java.math.BigInteger;
-import java.sql.SQLOutput;
 
 /**
  * Class for calculating factorial of a natural number
@@ -30,8 +29,9 @@ public class Factorial implements Executable {
     }
 
     /**
+     * Realization of interface method execute. Pull out all information through StringBuilder object
      *
-     * @return
+     * @return answer about factorial of a number
      */
     @Override
     public StringBuilder execute() {

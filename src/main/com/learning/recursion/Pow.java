@@ -8,7 +8,7 @@ import java.math.BigInteger;
  * @author Eugeniy Zozulya
  * @version 1.0
  */
-public class Pow implements Executable{
+public class Pow implements Executable {
 
     /**
      * @param number - digit for exponentiation, constrained by MAX_VALUE and MIN_VALUE of type Long
@@ -33,8 +33,9 @@ public class Pow implements Executable{
     }
 
     /**
+     * Realization of interface method execute. Pull out all information through StringBuilder object
      *
-     * @return
+     * @return answer about raising number to some power
      */
     @Override
     public StringBuilder execute() {
