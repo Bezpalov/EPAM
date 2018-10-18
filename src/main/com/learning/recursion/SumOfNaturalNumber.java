@@ -14,6 +14,9 @@ public class SumOfNaturalNumber implements Executable {
      * @throws IllegalArgumentException if parameter is negative
      */
     public Long getSumOfNaturalNumber(Long number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("parameter must be positive or 0");
+        }
         if (number < 10) {
             return number;
         }

@@ -9,6 +9,7 @@ public class Main {
     }
 
     /**
+     * Summarize all objects with Executable implementation and run them
      *
      * @return Pull out information about all executed methods
      */
