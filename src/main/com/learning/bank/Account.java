@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 /**
  * Class that represent an account in a bank.
- *
  */
 public class Account {
     private volatile BigDecimal count = BigDecimal.ZERO;
@@ -13,25 +12,26 @@ public class Account {
     private Account() {
     }
 
-    public synchronized boolean getMoney(long amount) {
+    public synchronized String getMoney(long amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount of money must be positive");
         }
 
         BigDecimal temp = BigDecimal.valueOf(amount);
         if (count.compareTo(temp) < 0) {
-            return false;
+            return "There is no enough money on account";
         }
         count = count.subtract(temp);
-        return true;
+        return "you have got " + amount + "RUB";
     }
 
-    public synchronized void putMoney (long amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("amount of money must be positive");
+    public synchronized String putMoney(long amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("amount of money must be more than zero");
         }
 
         BigDecimal temp = BigDecimal.valueOf(amount);
         count = count.add(temp);
+        return amount + " RUB has been successfully deposit on account";
     }
 }
