@@ -12,7 +12,7 @@ public class Account {
     private Account() {
     }
 
-    public synchronized String getMoney(long amount) {
+    public synchronized String getMoney(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount of money must be positive");
         }
@@ -25,7 +25,7 @@ public class Account {
         return "you have got " + amount + "RUB";
     }
 
-    public synchronized String putMoney(long amount) {
+    public synchronized String putMoney(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("amount of money must be more than zero");
         }
@@ -33,5 +33,9 @@ public class Account {
         BigDecimal temp = BigDecimal.valueOf(amount);
         count = count.add(temp);
         return amount + " RUB has been successfully deposit on account";
+    }
+
+    public synchronized BigDecimal showBalance() {
+        return count;
     }
 }
