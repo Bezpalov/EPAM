@@ -1,4 +1,6 @@
-package main.com.learning.bank;
+package main.com.learning.bank.exchange;
+
+import main.com.learning.bank.Account;
 
 import java.math.BigDecimal;
 

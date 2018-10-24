@@ -1,4 +1,6 @@
-package main.com.learning.bank;
+package main.com.learning.bank.charge;
+
+import main.com.learning.bank.Account;
 
 public class Charge implements Chargeable {
     @Override

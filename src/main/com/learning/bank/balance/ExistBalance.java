@@ -1,4 +1,6 @@
-package main.com.learning.bank;
+package main.com.learning.bank.balance;
+
+import main.com.learning.bank.Account;
 
 public class ExistBalance implements Balance {
     @Override
