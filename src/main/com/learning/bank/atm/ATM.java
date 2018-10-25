@@ -11,7 +11,7 @@ public abstract class ATM {
     protected Exchangeable exchange;
     protected Chargeable charge;
 
-    protected String getCash(Account acc, double money) {
+    public String getCash(Account acc, double money) {
         String result = "";
         try {
             result = acc.getMoney(money);

@@ -12,6 +12,10 @@ public class Account {
     private Account() {
     }
 
+    public static Account getInstance() {
+        return account;
+    }
+
     public synchronized String getMoney(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount of money must be positive");

@@ -5,6 +5,7 @@ import main.com.learning.bank.charge.Charge;
 import main.com.learning.bank.exchange.NoExchange;
 
 public class StandartATM extends ATM {
+
     public StandartATM() {
         balance = new ExistBalance();
         exchange = new NoExchange();
