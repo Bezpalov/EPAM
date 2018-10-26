@@ -6,13 +6,17 @@ import java.math.BigDecimal;
  * Class that represent an account in a bank.
  */
 public class Account {
-    private volatile BigDecimal count = BigDecimal.ZERO;
+    private BigDecimal count = BigDecimal.ZERO;
     private static final Account account = new Account();
 
     private Account() {
     }
 
-    public synchronized String getMoney(double amount) {
+    public static Account getAccount() {
+        return account;
+    }
+
+    public String getMoney(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount of money must be positive");
         }
@@ -25,7 +29,7 @@ public class Account {
         return "you have got " + amount + "RUB";
     }
 
-    public synchronized String putMoney(double amount) {
+    public String putMoney(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("amount of money must be more than zero");
         }
@@ -35,7 +39,7 @@ public class Account {
         return amount + " RUB has been successfully deposit on account";
     }
 
-    public synchronized BigDecimal showBalance() {
+    public BigDecimal showBalance() {
         return count;
     }
 }
