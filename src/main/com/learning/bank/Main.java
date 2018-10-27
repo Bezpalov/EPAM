@@ -6,13 +6,17 @@ import main.com.learning.bank.atm.OldATM;
 import main.com.learning.bank.atm.StandartATM;
 
 public class Main {
+
     public static void main(String[] args) {
-        OldATM oldATM = new OldATM();
-        ATM standartATM = new StandartATM();
-        AdvancedATM advancedATM = new AdvancedATM();
-
-        advancedATM.getBalance(Account.getInstance());
-        advancedATM.
-
+        ATM[] atms = getATMs();
+        for (int i = 0; i < atms.length; i++) {
+            new Thread(atms[i]).start();
+        }
     }
+
+    public static ATM[] getATMs () {
+        return new ATM[] {new OldATM(), new StandartATM(), new AdvancedATM()};
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package main.com.learning.bank.exchange;
+package main.com.learning.bank.abilities.exchange;
 
 import main.com.learning.bank.Account;
 

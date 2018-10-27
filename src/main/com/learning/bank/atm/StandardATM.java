@@ -2,18 +2,18 @@ package main.com.learning.bank.atm;
 
 import main.com.learning.bank.abilities.balance.ExistBalance;
 import main.com.learning.bank.abilities.charge.Charge;
-import main.com.learning.bank.abilities.exchange.Exchange;
+import main.com.learning.bank.abilities.exchange.NoExchange;
 
-public class AdvancedATM extends ATM {
+public class StandartATM extends ATM {
 
-    public AdvancedATM() {
+    public StandartATM() {
         balance = new ExistBalance();
-        exchange = new Exchange();
+        exchange = new NoExchange();
         charge = new Charge();
     }
 
     @Override
     public String toString() {
-        return " from AdvancedATM";
+        return " from StandartATM";
     }
 }

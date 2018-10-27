@@ -1,11 +1,11 @@
-package main.com.learning.bank.charge;
+package main.com.learning.bank.abilities.charge;
 
 import main.com.learning.bank.Account;
 
 public class Charge implements Chargeable {
 
     @Override
-    public String deposit(Account acc, long money) {
+    public String deposit(Account acc, double money) {
         if (acc == null) {
             throw new IllegalArgumentException("Account must exist");
         } else if (money <= 0) {
