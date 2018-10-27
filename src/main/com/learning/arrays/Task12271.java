@@ -2,7 +2,15 @@ package main.com.learning.arrays;
 
 public class Task12271 {
 
-
+    /**
+     * method cuts a substring from specified line
+     *
+     * @param array     2 dimensional char array that you want work with
+     * @param numOfLine number of line of array
+     * @param begin     starting index for substring
+     * @param end       final index for substring
+     * @return StringBuilder representation of result
+     */
     public StringBuilder getWord(char[][] array, int numOfLine, int begin, int end) {
         if (array == null) {
             throw new IllegalArgumentException("reference to null is not acceptable");

@@ -1,7 +1,14 @@
 package main.com.learning.arrays;
 
+/**
+ * Utility class to help with actions with arrays
+ */
 public class ArrayHelper {
 
+    /**
+     * @return 2 dimensional char array filled pseudo random
+     * values from 'a' to 'z'
+     */
     public static char[][] getTwoDimensionalArray() {
         char[][] array = new char[5][5];
         for (int i = 0; i < array.length; i++) {
@@ -13,6 +20,9 @@ public class ArrayHelper {
         return array;
     }
 
+    /**
+     * @param array 2 dimensional char array that you want to display
+     */
     public static void showArray(char[][] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
@@ -22,6 +32,10 @@ public class ArrayHelper {
         }
     }
 
+    /**
+     * @param array 2 dimensional char array that you want work with
+     * @return String representation of result
+     */
     public String execute(char[][] array) {
         if (array == null) {
             throw new IllegalArgumentException("Null is unacceptable");

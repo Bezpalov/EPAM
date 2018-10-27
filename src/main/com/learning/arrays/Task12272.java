@@ -20,6 +20,12 @@ public class Task12272 {
     }
 
 
+    /**
+     * method get characters from left to right next by one
+     *
+     * @param array 2 dimensional char array that you want work with
+     * @return StringBuilder representation of result
+     */
     public StringBuilder getLeftToRigth(char[][] array) {
         if (array == null) {
             throw new IllegalArgumentException("reference to null is not acceptable");
@@ -48,6 +54,13 @@ public class Task12272 {
         return result.append(temp);
     }
 
+
+    /**
+     * method get characters from up to down next by one
+     *
+     * @param array 2 dimensional char array that you want work with
+     * @return StringBuilder representation of result
+     */
     public StringBuilder getUpToDown(char[][] array) {
         if (array == null) {
             throw new IllegalArgumentException("reference to null is not acceptable");
