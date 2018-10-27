@@ -2,6 +2,9 @@ package main.com.learning.bank.abilities.charge;
 
 import main.com.learning.bank.Account;
 
+/**
+ * Class represented ATMs with possibility to charge balance
+ */
 public class Charge implements Chargeable {
 
     @Override
@@ -11,7 +14,6 @@ public class Charge implements Chargeable {
         } else if (money <= 0) {
             throw new IllegalArgumentException("Money must be more than zero");
         }
-
         return acc.putMoney(money);
     }
 }

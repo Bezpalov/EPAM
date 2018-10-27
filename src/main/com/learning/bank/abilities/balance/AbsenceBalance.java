@@ -2,6 +2,9 @@ package main.com.learning.bank.abilities.balance;
 
 import main.com.learning.bank.Account;
 
+/**
+ * Class represented ATMs with no possibility to show balance
+ */
 public class AbsenceBalance implements Balance {
 
     @Override

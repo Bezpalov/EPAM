@@ -4,6 +4,11 @@ import main.com.learning.bank.abilities.balance.ExistBalance;
 import main.com.learning.bank.abilities.charge.Charge;
 import main.com.learning.bank.abilities.exchange.Exchange;
 
+/**
+ * Realization of ATM with abilities:
+ * to put money, to get money, to show balance
+ * and exchange currency
+ */
 public class AdvancedATM extends ATM {
 
     public AdvancedATM() {

@@ -25,7 +25,6 @@ public class Exchange implements Exchangeable {
         } else if (result.startsWith("There is")) {
             return result;
         }
-
         return "unpredictable mistake";
     }
 
@@ -46,7 +45,6 @@ public class Exchange implements Exchangeable {
         } else if (result.startsWith("There is")) {
             return result;
         }
-
         return "unpredictable mistake";
     }
 }

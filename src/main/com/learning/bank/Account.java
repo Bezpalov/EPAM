@@ -3,10 +3,10 @@ package main.com.learning.bank;
 import java.math.BigDecimal;
 
 /**
- * Class that represent an account in a bank.
+ * Class that representing an account in a bank.
  */
 public class Account {
-    private BigDecimal count = BigDecimal.ZERO;
+    private volatile BigDecimal count = BigDecimal.ZERO;
     private static final Account account = new Account();
 
     private Account() {
@@ -16,8 +16,12 @@ public class Account {
         return account;
     }
 
-    public String getMoney(double amount) {
-        if (amount < 0) {
+    /**
+     * @param amount amount of money
+     * @return String representation of result of operation
+     */
+    public synchronized String getMoney(double amount) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("amount of money must be positive");
         }
 
@@ -29,17 +33,24 @@ public class Account {
         return "you have got " + amount + "RUB";
     }
 
-    public String putMoney(double amount) {
+    /**
+     * @param amount amount of money
+     * @return String representation of result of operation
+     */
+    public synchronized String putMoney(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("amount of money must be more than zero");
         }
 
         BigDecimal temp = BigDecimal.valueOf(amount);
         count = count.add(temp);
-        return amount + " RUB has been successfully deposit on account";
+        return amount + " RUB has been successfully deposited on account";
     }
 
-    public BigDecimal showBalance() {
+    /**
+     * @return balance of an account in BigDecimal
+     */
+    public synchronized BigDecimal showBalance() {
         return count;
     }
 }
