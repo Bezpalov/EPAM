@@ -1,13 +1,11 @@
-package tests.java.com.learning.arrays;
+package com.learning.arrays;
 
-import main.com.learning.arrays.ArrayHelper;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
 public class ArrayHelperTest {
-
     ArrayHelper arrayHelper;
     char[][] array;
 

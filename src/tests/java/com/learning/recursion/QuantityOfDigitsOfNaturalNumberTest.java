@@ -1,6 +1,4 @@
-package tests.java.com.learning.recursion;
-
-import main.com.learning.recursion.QuantityOfDigitsOfNaturalNumber;
+package com.learning.recursion;
 
 import org.junit.Before;
 import org.junit.Test;

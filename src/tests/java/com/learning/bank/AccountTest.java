@@ -1,6 +1,5 @@
-package tests.java.com.learning.bank;
+package com.learning.bank;
 
-import main.com.learning.bank.Account;
 import org.junit.Before;
 import org.junit.Test;
 

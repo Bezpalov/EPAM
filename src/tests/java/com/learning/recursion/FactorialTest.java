@@ -1,6 +1,5 @@
-package tests.java.com.learning.recursion;
+package com.learning.recursion;
 
-import main.com.learning.recursion.Factorial;
 import org.junit.Before;
 import org.junit.Test;
 

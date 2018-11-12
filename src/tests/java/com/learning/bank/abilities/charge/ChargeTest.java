@@ -1,7 +1,6 @@
-package tests.java.com.learning.bank.abilities.charge;
+package com.learning.bank.abilities.charge;
 
-import main.com.learning.bank.Account;
-import main.com.learning.bank.abilities.charge.Charge;
+import com.learning.bank.Account;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

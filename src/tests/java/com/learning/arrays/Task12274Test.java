@@ -1,6 +1,5 @@
-package tests.java.com.learning.arrays;
+package com.learning.arrays;
 
-import main.com.learning.arrays.Task12274;
 import org.junit.Before;
 import org.junit.Test;
 
