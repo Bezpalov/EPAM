@@ -5,12 +5,10 @@ import java.util.Objects;
 public class Point {
     private int x;
     private int y;
-    private int z;
 
-    public Point(int x, int y, int z) {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
-        this.z = z;
     }
 
     public int getX() {
@@ -29,27 +27,17 @@ public class Point {
         this.y = y;
     }
 
-    public int getZ() {
-        return z;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Point)) return false;
         Point point = (Point) o;
         return getX() == point.getX() &&
-                getY() == point.getY() &&
-                getZ() == point.getZ();
+                getY() == point.getY();
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getX(), getY(), getZ());
+        return Objects.hash(getX(), getY());
     }
 }

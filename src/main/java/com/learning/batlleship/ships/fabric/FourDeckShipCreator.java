@@ -1,7 +1,7 @@
 package main.java.com.learning.batlleship.ships.fabric;
 
-import main.java.com.learning.batlleship.ships.FourDeckShip;
-import main.java.com.learning.batlleship.ships.Ship;
+import main.java.com.learning.batlleship.ships.concreteships.FourDeckShip;
+import main.java.com.learning.batlleship.ships.concreteships.Ship;
 
 public class FourDeckShipCreator implements ShipFactory {
     @Override

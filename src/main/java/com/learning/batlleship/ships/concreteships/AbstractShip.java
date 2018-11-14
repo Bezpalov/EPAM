@@ -1,14 +1,13 @@
-package main.java.com.learning.batlleship.ships;
+package main.java.com.learning.batlleship.ships.concreteships;
 
 import main.java.com.learning.batlleship.Point;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public abstract class AbstractShip implements Ship {
     protected ArrayList<Point> points;
     protected int lives;
+    protected int length;
 
     @Override
     public ArrayList<Point> getCoordinates() {
@@ -35,5 +34,13 @@ public abstract class AbstractShip implements Ship {
     @Override
     public boolean isOnWater() {
         return lives > 0;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public int getLength() {
+        return length;
     }
 }

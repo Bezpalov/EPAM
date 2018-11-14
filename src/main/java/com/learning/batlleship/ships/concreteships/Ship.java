@@ -1,4 +1,4 @@
-package main.java.com.learning.batlleship.ships;
+package main.java.com.learning.batlleship.ships.concreteships;
 
 import main.java.com.learning.batlleship.Point;
 
@@ -13,4 +13,8 @@ public interface Ship {
     boolean isHit(Point point);
 
     boolean isOnWater();
+
+    int getLives();
+
+    int getLength();
 }
