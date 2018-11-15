@@ -2,7 +2,6 @@ package main.java.com.learning.batlleship;
 
 import main.java.com.learning.batlleship.ships.concreteships.Ship;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class FieldsManipulations {
@@ -97,28 +96,54 @@ public class FieldsManipulations {
         return true;
     }
 
-    public void showFields(char[][] chars) {
+    public void showFields(char[][] shipsMap, char[][] shotsMap) {
 
-        StringBuilder line = new StringBuilder();
-        for (int i = 0; i < chars[0].length; i++) {
-            for (int j = 0; j < chars[i].length; j++) {
-                line.append(chars[i][j]);
+        StringBuilder line = new StringBuilder("  0 1 2 3 4 5 6 7 8 9").append("   ")
+                .append("  0 1 2 3 4 5 6 7 8 9").append("\n");
+        for (int i = 0; i < shipsMap[0].length; i++) {
+            line.append(i).append(" ");
+            for (int j = 0; j < shipsMap[i].length; j++) {
+                line.append(shipsMap[j][i]).append(" ");
+            }
+            line.append("   ").append(i).append(" ");
+            for (int j = 0; j < shotsMap[i].length ; j++) {
+                line.append(shotsMap[j][i]).append(" ");
             }
             line.append("\n");
         }
         System.out.println(line);
     }
 
-    public boolean shooting(Point coordinate, char[][] field) {
+    public boolean shooting(Point coordinate, char[][] fieldForShips, char[][] fieldForShots, Ship[] ships) {
         int x = coordinate.getX();
         int y = coordinate.getY();
-        if (search(x, y, field)) {
+        if (searchAndChange(x, y, fieldForShips)) {
+            searchAShip(ships, coordinate);
+            gotHitted(fieldForShots, coordinate, true);
             return true;
         }
+        gotHitted(fieldForShots, coordinate, false);
         return false;
     }
 
-    private boolean search(int x, int y, char[][] field) {
+    private void gotHitted(char[][] fieldForShots, Point coordinate, boolean flag) {
+        if(flag) {
+            fieldForShots[coordinate.getX()][coordinate.getY()] = 'O';
+        } else {
+            fieldForShots[coordinate.getX()][coordinate.getY()] = 'M';
+        }
+    }
+
+    private Ship searchAShip(Ship[] ships, Point coordinate) {
+        for (int i = 0; i <ships.length ; i++) {
+            if(ships[i].isHit(coordinate)) {
+                return ships[i];
+            }
+        }
+        throw new IllegalArgumentException("Unexpected error in searchAShip");
+    }
+
+    private boolean searchAndChange(int x, int y, char[][] field) {
         if (field[x][y] == 'X') {
             field[x][y] = 'O';
             return true;
