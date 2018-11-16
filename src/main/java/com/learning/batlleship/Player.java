@@ -2,6 +2,7 @@ package main.java.com.learning.batlleship;
 
 import main.java.com.learning.batlleship.ships.concreteships.Ship;
 import main.java.com.learning.batlleship.ships.fabric.*;
+import sun.security.util.AuthResources_fr;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,6 +12,8 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ScheduledExecutorService;
 
 public abstract class Player implements Runnable {
+    protected static CyclicBarrier barrier;
+    protected static boolean flag = true;
     protected static Scanner scanner;
     protected String name;
     protected static Object mutex = new Object();
@@ -100,7 +103,7 @@ public abstract class Player implements Runnable {
     public void run() {
         scanner = new Scanner(System.in);
         Point coordinate;
-        CyclicBarrier barrier = new CyclicBarrier(2);
+        barrier = new CyclicBarrier(2);
         synchronized (mutex) {
             getName();
             System.out.println("Hello " + name + "\nPlease select coordinates for your ships");
@@ -108,12 +111,6 @@ public abstract class Player implements Runnable {
             fieldsManipulations.fillMapWithSetOfShips(getShips(), fieldForShips);
             System.out.println("Your ships is on map");
             fieldsManipulations.showFields(fieldForShips, fieldForShots);
-
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
 
         try {
@@ -124,21 +121,31 @@ public abstract class Player implements Runnable {
             e.printStackTrace();
         }
 
-        boolean flag = true;
-        synchronized (mutex) {
-            while (isFleetOnWater()) {
 
+        while (isFleetOnWater()) {
+            synchronized (mutex) {
+                System.out.println(name + "is in block " + Thread.currentThread().getName());
+                while(!flag) {
+                    try {
+                        System.out.println(Thread.currentThread().getName());
+                        mutex.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 while (true) {
                     System.out.println(name + "'s turn, enter coordinate for a hit");
                     coordinate = fromIntToPoint(scanner.nextInt());
                     if (fieldsManipulations.shooting(coordinate, anotherPlayer.fieldForShips,
                             fieldForShots, anotherPlayer.getShips())) {
+                        System.out.println("Hit!!!11");
                         fieldsManipulations.showFields(fieldForShips, fieldForShots);
                     } else {
-                        flag = false;
                         break;
                     }
                 }
+                flag = !flag;
+                mutex.notify();
             }
         }
         scanner.close();
