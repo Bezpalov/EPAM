@@ -1,4 +1,4 @@
-package main.java.com.learning.batlleship.ships.concreteships;
+package com.learning.batlleship.ships.concreteships;
 
 import java.util.ArrayList;
 

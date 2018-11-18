@@ -1,4 +1,4 @@
-package main.java.com.learning.batlleship;
+package com.learning.batlleship.util;
 
 import java.util.Objects;
 

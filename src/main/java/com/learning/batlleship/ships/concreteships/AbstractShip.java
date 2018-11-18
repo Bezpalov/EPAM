@@ -1,6 +1,6 @@
-package main.java.com.learning.batlleship.ships.concreteships;
+package com.learning.batlleship.ships.concreteships;
 
-import main.java.com.learning.batlleship.Point;
+import com.learning.batlleship.util.Point;
 
 import java.util.ArrayList;
 

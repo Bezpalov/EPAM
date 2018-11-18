@@ -1,7 +1,7 @@
-package main.java.com.learning.batlleship.ships.fabric;
+package com.learning.batlleship.ships.fabric;
 
-import main.java.com.learning.batlleship.ships.concreteships.Ship;
-import main.java.com.learning.batlleship.ships.concreteships.ThreeDeckShip;
+import com.learning.batlleship.ships.concreteships.Ship;
+import com.learning.batlleship.ships.concreteships.ThreeDeckShip;
 
 public class ThreeDeckShipCreator implements ShipFactory {
 

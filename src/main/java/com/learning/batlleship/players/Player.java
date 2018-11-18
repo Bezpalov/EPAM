@@ -1,22 +1,19 @@
-package main.java.com.learning.batlleship;
+package com.learning.batlleship.players;
 
-import main.java.com.learning.batlleship.ships.concreteships.Ship;
-import main.java.com.learning.batlleship.ships.fabric.*;
-import sun.security.util.AuthResources_fr;
+import com.learning.batlleship.util.FieldsManipulations;
+import com.learning.batlleship.util.Point;
+import com.learning.batlleship.ships.concreteships.Ship;
+import com.learning.batlleship.ships.fabric.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.ScheduledExecutorService;
 
 public abstract class Player implements Runnable {
-    protected static CyclicBarrier barrier;
-    protected static boolean flag = true;
-    protected static Scanner scanner;
+    protected static CyclicBarrier barrier = new CyclicBarrier(2);
+    public static Scanner scanner;
     protected String name;
-    protected static Object mutex = new Object();
+    protected static final Object mutex = new Object();
     protected char[][] fieldForShips = new char[10][10];
     protected char[][] fieldForShots = new char[10][10];
     protected ArrayList<Ship> listOfShips;
@@ -66,13 +63,13 @@ public abstract class Player implements Runnable {
 
     }
 
-    public Ship[] getShips() {
+    protected Ship[] getShips() {
         Ship[] ships = new Ship[10];
         listOfShips.toArray(ships);
         return ships;
     }
 
-    public void getName() {
+    protected void getName() {
         System.out.println("Enter your name:");
         Scanner scanner = new Scanner(System.in);
         name = scanner.nextLine();
@@ -82,7 +79,7 @@ public abstract class Player implements Runnable {
         this.anotherPlayer = player;
     }
 
-    private boolean isFleetOnWater() {
+    protected boolean isFleetOnWater() {
         for (Ship s : listOfShips) {
             if (s.isOnWater()) {
                 return true;
@@ -103,7 +100,6 @@ public abstract class Player implements Runnable {
     public void run() {
         scanner = new Scanner(System.in);
         Point coordinate;
-        barrier = new CyclicBarrier(2);
         synchronized (mutex) {
             getName();
             System.out.println("Hello " + name + "\nPlease select coordinates for your ships");
@@ -124,14 +120,11 @@ public abstract class Player implements Runnable {
 
         while (isFleetOnWater()) {
             synchronized (mutex) {
-                System.out.println(name + "is in block " + Thread.currentThread().getName());
-                while(!flag) {
-                    try {
-                        System.out.println(Thread.currentThread().getName());
-                        mutex.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                mutex.notify();
+                try {
+                    mutex.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
                 while (true) {
                     System.out.println(name + "'s turn, enter coordinate for a hit");
@@ -140,16 +133,19 @@ public abstract class Player implements Runnable {
                             fieldForShots, anotherPlayer.getShips())) {
                         System.out.println("Hit!!!11");
                         fieldsManipulations.showFields(fieldForShips, fieldForShots);
+                        if (!anotherPlayer.isFleetOnWater()) {
+                            System.out.println(name + " has won");
+                            System.exit(0);
+                        }
                     } else {
+                        System.out.println("Miss!");
                         break;
                     }
                 }
-                flag = !flag;
-                mutex.notify();
             }
         }
+        System.out.println(name + "have lost");
         scanner.close();
+        System.exit(0);
     }
-
-
 }

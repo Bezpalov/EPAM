@@ -1,27 +1,55 @@
-package main.java.com.learning.batlleship;
+package com.learning.batlleship;
+
+import com.learning.batlleship.players.PC;
+import com.learning.batlleship.players.Player;
+import com.learning.batlleship.players.User;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        Player player = new Player();
-//
-//        player.getCoordinatesFromUser();
-//        FieldsManipulations manipulations = new FieldsManipulations();
-//        manipulations.fillMapWithSetOfShips(player.getShips(),player.fieldForShips);
-//        manipulations.showFields(player.fieldForShips, player.fieldForShots);
-//        manipulations.shooting(new Point(2,4), player.fieldForShips, player.fieldForShots, player.getShips());
-//        manipulations.shooting(new Point(3,6), player.fieldForShips, player.fieldForShots, player.getShips());
-//        manipulations.shooting(new Point(9,7), player.fieldForShips, player.fieldForShots, player.getShips());
-//        manipulations.showFields(player.fieldForShips, player.fieldForShots);
+       // new Main().letsStart();
+        new PC().run();
 
-        Player player1 = new User();
-        Player player2 = new User();
-        player1.setAnotherPlayer(player2);
-        player2.setAnotherPlayer(player1);
+    }
 
-        Thread threa1 = new Thread(player1);
-        Thread thread2 = new Thread(player2);
-        threa1.start();
-        thread2.start();
+    public void letsStart(){
+        Player.scanner = new Scanner(System.in);
+        System.out.println("Hello, this is a battleship game");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Please select a game mode:" +
+                            "\n 1) versus PC (type: PC)" +
+                            "\n 2) versus another player (type: Player)");
+        String answer = Player.scanner.nextLine();
+
+        switch (answer.toUpperCase()) {
+            case "PC":
+                PC pc = new PC();
+                User user = new User();
+                pc.setAnotherPlayer(user);
+                user.setAnotherPlayer(pc);
+
+                new Thread(pc).start();
+                new Thread(user).start();
+
+                break;
+            case "PLAYER":
+                User user1 = new User();
+                User user2 = new User();
+                user1.setAnotherPlayer(user2);
+                user2.setAnotherPlayer(user1);
+
+                new Thread(user1).start();
+                new Thread(user2).start();
+                break;
+        }
+
     }
 
 }

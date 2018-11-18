@@ -1,6 +1,6 @@
-package main.java.com.learning.batlleship;
+package com.learning.batlleship.util;
 
-import main.java.com.learning.batlleship.ships.concreteships.Ship;
+import com.learning.batlleship.ships.concreteships.Ship;
 
 import java.util.ArrayList;
 
@@ -30,38 +30,44 @@ public class FieldsManipulations {
         return result.toString();
     }
 
-    private String randomShipLocating(Ship ship, char[][] map) {
+    public ArrayList<Point> randomShipLocating(Ship ship, char[][] map) {
         int x;
         int y;
         boolean isFound = false;
-        String message = "unpredictable problem in randomShipLocating";
+        ArrayList<Point> points = null;
 
         while (!isFound) {
             x = (int) (Math.random() * 10);
             y = (int) (Math.random() * 10);
-            if (map[x][y] == ' ') {
-                ArrayList<Point> points = new ArrayList<>(ship.getLength());
-                int side = (int) Math.abs(Math.random());
+
+            if (checkOnOutOfRange(x, y, ship) && map[x][y] == '\u0000') {
+                points = new ArrayList<>(ship.getLength());
+                int side = (int) Math.round(Math.random());
 
                 switch (side) {
                     case 0:
-                        for (int i = x; i < ship.getLength(); i++) {
+                        for (int i = x; i < ship.getLength() + x; i++) {
                             points.add(new Point(i, y));
                         }
                         break;
                     case 1:
-                        for (int i = y; i < ship.getLength(); i++) {
+                        for (int i = y; i < ship.getLength() + y; i++) {
                             points.add(new Point(x, i));
                         }
                         break;
                 }
                 if (checkOnCapacity(points, map) && checkOnBoarders(points, map)) {
-                    message = "new location for ship has been done";
                     isFound = true;
                 }
             }
         }
-        return message;
+        return points;
+    }
+
+    private boolean checkOnOutOfRange(int x, int y, Ship ship) {
+        int length = ship.getLength();
+        return (x + length < 10 && x - length >= 0 &&
+                y + length < 10 && y - length >= 0);
     }
 
     private boolean checkOnCapacity(ArrayList<Point> coordinates, char[][] map) {
@@ -98,16 +104,25 @@ public class FieldsManipulations {
 
     public void showFields(char[][] shipsMap, char[][] shotsMap) {
 
-        StringBuilder line = new StringBuilder("  0 1 2 3 4 5 6 7 8 9").append("   ")
+        StringBuilder line = new StringBuilder("  0 1 2 3 4 5 6 7 8 9").append("    ")
                 .append("  0 1 2 3 4 5 6 7 8 9").append("\n");
         for (int i = 0; i < shipsMap[0].length; i++) {
             line.append(i).append(" ");
             for (int j = 0; j < shipsMap[i].length; j++) {
-                line.append(shipsMap[j][i]).append(" ");
+                if(shipsMap[j][i] == 'X' || shipsMap[j][i] == 'O') {
+                    line.append(shipsMap[j][i]).append(" ");
+                }else {
+                    line.append("  ");
+                }
             }
             line.append("   ").append(i).append(" ");
             for (int j = 0; j < shotsMap[i].length ; j++) {
-                line.append(shotsMap[j][i]).append(" ");
+                if(!Character.isLetter(shotsMap[j][i])) {
+                    line.append("  ");
+                }else {
+                    line.append(shotsMap[j][i]).append(" ");
+                }
+
             }
             line.append("\n");
         }
@@ -119,16 +134,17 @@ public class FieldsManipulations {
         int y = coordinate.getY();
         if (searchAndChange(x, y, fieldForShips)) {
             searchAShip(ships, coordinate);
-            gotHitted(fieldForShots, coordinate, true);
+            gotHitted(fieldForShots,fieldForShips, coordinate, true);
             return true;
         }
-        gotHitted(fieldForShots, coordinate, false);
+        gotHitted(fieldForShots,fieldForShips, coordinate, false);
         return false;
     }
 
-    private void gotHitted(char[][] fieldForShots, Point coordinate, boolean flag) {
+    private void gotHitted(char[][] fieldForShots,char[][] fieldForShips, Point coordinate, boolean flag) {
         if(flag) {
             fieldForShots[coordinate.getX()][coordinate.getY()] = 'O';
+            fieldForShips[coordinate.getX()][coordinate.getY()] = 'O';
         } else {
             fieldForShots[coordinate.getX()][coordinate.getY()] = 'M';
         }
