@@ -1,6 +1,5 @@
 package com.learning.batlleship.players;
 
-import com.learning.batlleship.util.FieldsManipulations;
 import com.learning.batlleship.util.Point;
 
 import java.util.concurrent.BrokenBarrierException;
@@ -14,9 +13,9 @@ public class PC extends Player {
         synchronized (mutex) {
             name = "PC";
             for (int i = 0; i < listOfShips.size(); i++) {
-                listOfShips.get(i).setCoordinates(fieldsManipulations.randomShipLocating(listOfShips.get(i), fieldForShips));
+                fieldsManipulations.randomShipLocating(listOfShips.get(i), fieldForShips);
             }
-            fieldsManipulations.fillMapWithSetOfShips(getShips(), fieldForShips);
+//            fieldsManipulations.fillMapWithSetOfShips(getShips(), fieldForShips);
             System.out.println("PC ships is on map");
             fieldsManipulations.showFields(fieldForShips, fieldForShots);
         }

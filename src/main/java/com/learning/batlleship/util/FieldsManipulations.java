@@ -16,7 +16,8 @@ public class FieldsManipulations {
             }
             result = "The" + ship.getClass().getName() + "is successfully located on the map";
         } else {
-            result = randomShipLocating(ship, map);
+            result = "random ship has created";
+            randomShipLocating(ship, map);
         }
         return result;
     }
@@ -30,7 +31,7 @@ public class FieldsManipulations {
         return result.toString();
     }
 
-    public ArrayList<Point> randomShipLocating(Ship ship, char[][] map) {
+    public void randomShipLocating(Ship ship, char[][] map) {
         int x;
         int y;
         boolean isFound = false;
@@ -56,12 +57,18 @@ public class FieldsManipulations {
                         }
                         break;
                 }
-                if (checkOnCapacity(points, map) && checkOnBoarders(points, map)) {
+                if (checkOnCapacity(points, map) && checkOnBoarders(points, map)
+                        && checkOnDistance(points, map)) {
                     isFound = true;
                 }
             }
         }
-        return points;
+        ship.setCoordinates(points);
+        fillMapWithShip(ship, map);
+    }
+
+    private boolean checkOnDistance(ArrayList<Point> points, char[][] map) {
+        return true;
     }
 
     private boolean checkOnOutOfRange(int x, int y, Ship ship) {
