@@ -41,30 +41,52 @@ public class FieldsManipulations {
             x = (int) (Math.random() * 10);
             y = (int) (Math.random() * 10);
 
-            if (checkOnOutOfRange(x, y, ship) && map[x][y] == '\u0000') {
-                points = new ArrayList<>(ship.getLength());
-                int side = (int) Math.round(Math.random());
+            points = new ArrayList<>(ship.getLength());
+            int direction = (int) Math.round(Math.random() * 3);
 
-                switch (side) {
-                    case 0:
-                        for (int i = x; i < ship.getLength() + x; i++) {
-                            points.add(new Point(i, y));
-                        }
-                        break;
-                    case 1:
-                        for (int i = y; i < ship.getLength() + y; i++) {
-                            points.add(new Point(x, i));
-                        }
-                        break;
-                }
-                if (checkOnCapacity(points, map) && checkOnBoarders(points, map)
-                        && checkOnDistance(points, map)) {
-                    isFound = true;
-                }
+            switch (direction) {
+                case 0:
+                    for (int i = x; i < ship.getLength() + x; i++) {
+                        points.add(new Point(i, y));
+                    }
+                    break;
+                case 1:
+                    for (int i = y; i < ship.getLength() + y; i++) {
+                        points.add(new Point(x, i));
+                    }
+                    break;
+                case 2:
+                    for (int i = x; i > x - ship.getLength(); i--) {
+                        points.add(new Point(i, y));
+                    }
+                    break;
+                case 3:
+                    for (int i = y; i > y - ship.getLength(); i--) {
+                        points.add(new Point(x, i));
+                    }
+                    break;
+            }
+            if (checkOnPositive(points)
+                    && checkOnCapacity(points, map)
+                    && checkOnBoarders(points, map)) {
+                isFound = true;
             }
         }
         ship.setCoordinates(points);
         fillMapWithShip(ship, map);
+    }
+
+    private boolean checkOnPositive(ArrayList<Point> points) {
+        int x;
+        int y;
+        for (Point p : points) {
+            x = p.getX();
+            y = p.getY();
+            if (x < 0 || y < 0 || x > 9 || y > 9) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean checkOnDistance(ArrayList<Point> points, char[][] map) {
@@ -97,7 +119,7 @@ public class FieldsManipulations {
                 if (i < 0 || i > 9) {
                     continue;
                 }
-                for (int j = y - 1; j < y + 1; j++) {
+                for (int j = y - 1; j <= y + 1; j++) {
                     if (j < 0 || j > 9) {
                         continue;
                     } else if (map[i][j] == 'X') {
@@ -116,17 +138,17 @@ public class FieldsManipulations {
         for (int i = 0; i < shipsMap[0].length; i++) {
             line.append(i).append(" ");
             for (int j = 0; j < shipsMap[i].length; j++) {
-                if(shipsMap[j][i] == 'X' || shipsMap[j][i] == 'O') {
+                if (shipsMap[j][i] == 'X' || shipsMap[j][i] == 'O') {
                     line.append(shipsMap[j][i]).append(" ");
-                }else {
+                } else {
                     line.append("  ");
                 }
             }
             line.append("   ").append(i).append(" ");
-            for (int j = 0; j < shotsMap[i].length ; j++) {
-                if(!Character.isLetter(shotsMap[j][i])) {
+            for (int j = 0; j < shotsMap[i].length; j++) {
+                if (!Character.isLetter(shotsMap[j][i])) {
                     line.append("  ");
-                }else {
+                } else {
                     line.append(shotsMap[j][i]).append(" ");
                 }
 
@@ -136,41 +158,40 @@ public class FieldsManipulations {
         System.out.println(line);
     }
 
-    public boolean shooting(Point coordinate, char[][] fieldForShips, char[][] fieldForShots, Ship[] ships) {
+    public boolean shooting(Point coordinate, char[][] AnotherPlayerField, char[][] fieldForShots, Ship[] AnotherPlayerShips) {
         int x = coordinate.getX();
         int y = coordinate.getY();
-        if (searchAndChange(x, y, fieldForShips)) {
-            searchAShip(ships, coordinate);
-            gotHitted(fieldForShots,fieldForShips, coordinate, true);
+        if (searchOnHit(x, y, AnotherPlayerField)) {
+            searchAShip(AnotherPlayerShips, coordinate);
+            gotHitted(fieldForShots, AnotherPlayerField, coordinate, true);
             return true;
         }
-        gotHitted(fieldForShots,fieldForShips, coordinate, false);
+        gotHitted(fieldForShots, AnotherPlayerField, coordinate, false);
         return false;
     }
 
-    private void gotHitted(char[][] fieldForShots,char[][] fieldForShips, Point coordinate, boolean flag) {
-        if(flag) {
-            fieldForShots[coordinate.getX()][coordinate.getY()] = 'O';
-            fieldForShips[coordinate.getX()][coordinate.getY()] = 'O';
+    private void gotHitted(char[][] fieldForShots, char[][] fieldForShips, Point coordinate, boolean flag) {
+        int x = coordinate.getX();
+        int y = coordinate.getY();
+        if (flag) {
+            fieldForShots[x][y] = 'O';
+            fieldForShips[x][y] = 'O';
         } else {
-            fieldForShots[coordinate.getX()][coordinate.getY()] = 'M';
+            fieldForShips[x][y] = 'M';
+            fieldForShots[x][y] = 'M';
         }
     }
 
     private Ship searchAShip(Ship[] ships, Point coordinate) {
-        for (int i = 0; i <ships.length ; i++) {
-            if(ships[i].isHit(coordinate)) {
+        for (int i = 0; i < ships.length; i++) {
+            if (ships[i].isHit(coordinate)) {
                 return ships[i];
             }
         }
         throw new IllegalArgumentException("Unexpected error in searchAShip");
     }
 
-    private boolean searchAndChange(int x, int y, char[][] field) {
-        if (field[x][y] == 'X') {
-            field[x][y] = 'O';
-            return true;
-        }
-        return false;
+    private boolean searchOnHit(int x, int y, char[][] field) {
+        return field[x][y] == 'X';
     }
 }

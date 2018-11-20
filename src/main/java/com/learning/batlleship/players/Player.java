@@ -53,7 +53,6 @@ public abstract class Player implements Runnable {
 //            }
 //            listOfShips.get(i).setCoordinates(coordinatesList);
 //        }
-//        scanner.close();
         ArrayList<Point> fourDeck = new ArrayList<>();
         fourDeck.add(new Point(2, 2));
         fourDeck.add(new Point(2, 3));
@@ -127,18 +126,18 @@ public abstract class Player implements Runnable {
                     e.printStackTrace();
                 }
                 while (true) {
+                    fieldsManipulations.showFields(fieldForShips, fieldForShots);
                     System.out.println(name + "'s turn, enter coordinate for a hit");
                     coordinate = fromIntToPoint(scanner.nextInt());
                     if (fieldsManipulations.shooting(coordinate, anotherPlayer.fieldForShips,
                             fieldForShots, anotherPlayer.getShips())) {
                         System.out.println("Hit!!!11");
-                        fieldsManipulations.showFields(fieldForShips, fieldForShots);
                         if (!anotherPlayer.isFleetOnWater()) {
                             System.out.println(name + " has won");
                             System.exit(0);
                         }
                     } else {
-                        System.out.println("Miss!");
+                        System.out.println("Miss!\n");
                         break;
                     }
                 }

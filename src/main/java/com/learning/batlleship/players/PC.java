@@ -6,7 +6,6 @@ import java.util.concurrent.BrokenBarrierException;
 
 public class PC extends Player {
 
-
     @Override
     public void run() {
         Point coordinate;
@@ -15,9 +14,7 @@ public class PC extends Player {
             for (int i = 0; i < listOfShips.size(); i++) {
                 fieldsManipulations.randomShipLocating(listOfShips.get(i), fieldForShips);
             }
-//            fieldsManipulations.fillMapWithSetOfShips(getShips(), fieldForShips);
             System.out.println("PC ships is on map");
-            fieldsManipulations.showFields(fieldForShips, fieldForShots);
         }
 
         try {
@@ -43,6 +40,7 @@ public class PC extends Player {
                 while (true) {
                     System.out.println(name + "'s turn");
                     coordinate = getRandomShot(isRepeat, previousShot);
+                    System.out.println("PC choose a " + coordinate.getX() + coordinate.getY() + " to shot");
                     if (fieldsManipulations.shooting(coordinate, anotherPlayer.fieldForShips,
                             fieldForShots, anotherPlayer.getShips())) {
                         System.out.println("Hit!!!11");
@@ -66,8 +64,8 @@ public class PC extends Player {
     }
 
     private Point getRandomShot(boolean isRepeat, Point previous) {
-        int x = 0;
-        int y = 0;
+        int x = (int) Math.round(Math.random() * 9);
+        int y = (int) Math.round(Math.random() * 9);
 
         if (isRepeat) {
             int previousX = previous.getX();
@@ -92,11 +90,7 @@ public class PC extends Player {
                     y = previousY;
                     break;
             }
-        } else {
-            x = (int) Math.random() * 10;
-            y = (int) Math.random() * 10;
         }
         return new Point(x, y);
     }
-
 }
