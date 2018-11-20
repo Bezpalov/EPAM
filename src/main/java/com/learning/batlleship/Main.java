@@ -9,11 +9,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
        new Main().letsStart();
-
-
-
     }
 
+    /**
+     * Method for start a game
+     */
     public void letsStart(){
         Player.scanner = new Scanner(System.in);
         System.out.println("Hello, this is a battleship game");

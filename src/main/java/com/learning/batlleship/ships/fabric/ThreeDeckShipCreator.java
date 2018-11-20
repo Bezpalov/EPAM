@@ -3,6 +3,9 @@ package com.learning.batlleship.ships.fabric;
 import com.learning.batlleship.ships.concreteships.Ship;
 import com.learning.batlleship.ships.concreteships.ThreeDeckShip;
 
+/**
+ * Creator of 3 deck ships
+ */
 public class ThreeDeckShipCreator implements ShipFactory {
 
     @Override

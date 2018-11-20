@@ -3,6 +3,9 @@ package com.learning.batlleship.ships.fabric;
 import com.learning.batlleship.ships.concreteships.OneDeckShip;
 import com.learning.batlleship.ships.concreteships.Ship;
 
+/**
+ * Creator of 1 deck ships
+ */
 public class OneDeckShipCreator implements ShipFactory {
 
     @Override
@@ -13,7 +16,7 @@ public class OneDeckShipCreator implements ShipFactory {
     @Override
     public Ship[] createSetOfShips() {
         Ship[] ships = {new OneDeckShip(), new OneDeckShip(),
-                        new OneDeckShip(), new OneDeckShip()};
+                new OneDeckShip(), new OneDeckShip()};
         return ships;
     }
 }
