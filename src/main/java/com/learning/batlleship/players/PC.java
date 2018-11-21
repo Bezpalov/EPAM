@@ -91,6 +91,7 @@ public class PC extends Player {
      * @return
      */
     private Point getRandomShot(boolean isRepeat, Point previous) {
+
         int x = (int) Math.round(Math.random() * 9);
         int y = (int) Math.round(Math.random() * 9);
 

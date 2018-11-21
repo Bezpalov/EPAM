@@ -4,6 +4,7 @@ import com.learning.batlleship.util.Point;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Abstract class that represents basic ship
@@ -21,7 +22,8 @@ public abstract class AbstractShip implements Ship {
     @Override
     public void setCoordinates(List<Point> points) {
         if (points == null) {
-            throw new IllegalArgumentException("points must exist"); }
+            throw new IllegalArgumentException("points must exist");
+        }
         this.points = points;
     }
 
@@ -32,7 +34,6 @@ public abstract class AbstractShip implements Ship {
         }
         for (int i = 0; i < points.size(); i++) {
             if (points.get(i).equals(point)) {
-
                 lives--;
                 return true;
             }
@@ -61,5 +62,19 @@ public abstract class AbstractShip implements Ship {
      */
     public int getLength() {
         return length;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractShip)) return false;
+        AbstractShip that = (AbstractShip) o;
+        return getLives() == that.getLives() &&
+                getLength() == that.getLength();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getLives(), getLength());
     }
 }

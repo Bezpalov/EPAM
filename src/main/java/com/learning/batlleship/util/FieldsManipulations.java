@@ -18,7 +18,7 @@ public class FieldsManipulations {
      * @return String representation of what kind of coordinates was used
      * (if coordinates are wrong or don't put in map)
      */
-    private String fillMapWithShip(Ship ship, char[][] map) {
+    public String fillMapWithShip(Ship ship, char[][] map) {
         if (ship == null) {
             throw new IllegalArgumentException("ship must exists");
         } else if (map == null) {
@@ -125,7 +125,7 @@ public class FieldsManipulations {
      * @return true - if all coordinate are positive (including 0)
      * false - if even one number will be negative
      */
-    private boolean checkOnPositive(ArrayList<Point> points) {
+    public boolean checkOnPositive(List<Point> points) {
         if (points == null) {
             throw new IllegalArgumentException("points must exists");
         }
@@ -152,7 +152,7 @@ public class FieldsManipulations {
      * existing ships
      * false - if a future ship will collide with  already existing ships
      */
-    private boolean checkOnCapacity(List<Point> coordinates, char[][] map) {
+    public boolean checkOnCapacity(List<Point> coordinates, char[][] map) {
         if (coordinates == null) {
             throw new IllegalArgumentException("coordinates must exists");
         } else if (map == null) {
@@ -175,7 +175,7 @@ public class FieldsManipulations {
      * @return true - if a future ship will fit into map with offset
      * false - if a future ship will not fit into map with offset
      */
-    private boolean checkOnBoarders(List<Point> coordinates, char[][] map) {
+    public boolean checkOnBoarders(List<Point> coordinates, char[][] map) {
         if (coordinates == null) {
             throw new IllegalArgumentException("coordinates must exists");
         } else if (map == null) {
@@ -283,7 +283,7 @@ public class FieldsManipulations {
      * @param hittedShip    "dead" ship
      * @param fieldForShots field which ship will be drawn in
      */
-    private void getBordersAroundShip(Ship hittedShip, char[][] fieldForShots) {
+    public void getBordersAroundShip(Ship hittedShip, char[][] fieldForShots) {
         if (hittedShip == null) {
             throw new IllegalArgumentException("hittedShip must exists");
         } else if (fieldForShots == null) {
@@ -319,7 +319,7 @@ public class FieldsManipulations {
      * @param flag          true - shot was hit the target
      *                      false - shot was missed
      */
-    private void gotHitted(char[][] fieldForShots, char[][] fieldForShips, Point coordinate, boolean flag) {
+    public void gotHitted(char[][] fieldForShots, char[][] fieldForShips, Point coordinate, boolean flag) {
         if (fieldForShots == null) {
             throw new IllegalArgumentException("fieldForShots must exists");
         } else if (fieldForShips == null) {
@@ -349,7 +349,7 @@ public class FieldsManipulations {
      * @param coordinate coordinate of a shot
      * @return Ship object with coordinate equal shot coordinate
      */
-    private Ship searchAShip(Ship[] ships, Point coordinate) {
+    public Ship searchAShip(Ship[] ships, Point coordinate) {
         if (ships == null) {
             throw new IllegalArgumentException("ships must exists");
         } else if (coordinate == null) {
@@ -375,7 +375,7 @@ public class FieldsManipulations {
      * false - if pointed coordinate on a field content
      * something else but not part of a ship ('X')
      */
-    private boolean searchOnHit(int x, int y, char[][] field) {
+    public boolean searchOnHit(int x, int y, char[][] field) {
         return field[x][y] == 'X';
     }
 }

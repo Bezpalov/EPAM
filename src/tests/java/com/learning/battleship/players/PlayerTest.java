@@ -102,8 +102,25 @@ public class PlayerTest extends Player {
 
     @Test
     public void testFromIntToPoint() {
-        assertEquals(new Point(1,2), fromIntToPoint("12"));
-        assertEquals(new Point(7,9), fromIntToPoint("79sdf"));
+
+        assertTrue(new Point(1, 2).equals(fromIntToPoint("12")));
+        assertFalse(new Point(7, 9).equals(fromIntToPoint("79sdf")));
+    }
+
+    @Test
+    public void testIsNumeric() {
+        assertTrue(isNumeric("22"));
+        assertFalse(isNumeric("22aa"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCheckOnRepeatExceptionField() {
+        checkOnRepeat(charArray, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCheckOnRepeatExceptionArray() {
+        checkOnRepeat(null, new Point(1, 1));
     }
 
 }

@@ -16,4 +16,9 @@ public class OneDeckShip extends AbstractShip {
     public String toString() {
         return "OneDeckShip";
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
