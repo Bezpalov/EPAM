@@ -3,6 +3,7 @@ package com.learning.batlleship.util;
 import com.learning.batlleship.ships.concreteships.Ship;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for actions with fields
@@ -23,7 +24,7 @@ public class FieldsManipulations {
         } else if (map == null) {
             throw new IllegalArgumentException("map must exists");
         }
-        ArrayList<Point> coordinates = ship.getCoordinates();
+        List<Point> coordinates = ship.getCoordinates();
         String result;
 
         if (checkOnCapacity(coordinates, map) && checkOnBoarders(coordinates, map)) {
@@ -151,7 +152,7 @@ public class FieldsManipulations {
      * existing ships
      * false - if a future ship will collide with  already existing ships
      */
-    private boolean checkOnCapacity(ArrayList<Point> coordinates, char[][] map) {
+    private boolean checkOnCapacity(List<Point> coordinates, char[][] map) {
         if (coordinates == null) {
             throw new IllegalArgumentException("coordinates must exists");
         } else if (map == null) {
@@ -174,7 +175,7 @@ public class FieldsManipulations {
      * @return true - if a future ship will fit into map with offset
      * false - if a future ship will not fit into map with offset
      */
-    private boolean checkOnBoarders(ArrayList<Point> coordinates, char[][] map) {
+    private boolean checkOnBoarders(List<Point> coordinates, char[][] map) {
         if (coordinates == null) {
             throw new IllegalArgumentException("coordinates must exists");
         } else if (map == null) {

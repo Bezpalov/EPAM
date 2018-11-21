@@ -21,7 +21,7 @@ public abstract class Player implements Runnable {
     protected static final Object mutex = new Object();
     protected char[][] fieldForShips = new char[10][10];
     protected char[][] fieldForShots = new char[10][10];
-    protected ArrayList<Ship> listOfShips;
+    protected List<Ship> listOfShips;
     protected FieldsManipulations fieldsManipulations;
     protected Player anotherPlayer;
 
@@ -37,7 +37,7 @@ public abstract class Player implements Runnable {
      *
      * @return List with ships from ship factory
      */
-    protected ArrayList<Ship> createShips() {
+    protected List<Ship> createShips() {
         ArrayList<Ship> listOfShips = new ArrayList<>();
         ShipFactory[] factories = {new FourDeckShipCreator(), new ThreeDeckShipCreator(),
                 new TwoDeckShipCreator(), new OneDeckShipCreator()};
@@ -62,8 +62,8 @@ public abstract class Player implements Runnable {
             ArrayList<Point> coordinatesList = new ArrayList<>();
             for (int j = 0; j < listOfShips.get(i).getLength(); j++) {
                 System.out.println(j + " coordinate: ");
-                int temp = scanner.nextInt();
-                temp = Integer.valueOf(("" + temp).substring(0, 2));
+                String input = scanner.nextLine();
+                int temp = Integer.valueOf(input.substring(0, 2));
                 int x = temp / 10;
                 int y = temp % 10;
                 coordinatesList.add(new Point(x, y));
@@ -127,16 +127,39 @@ public abstract class Player implements Runnable {
      * @param input String from user
      * @return Point object that represent a coordinates
      */
-    private Point fromIntToPoint(String input) {
+    protected Point fromIntToPoint(String input) {
         if (input == null) {
             throw new IllegalArgumentException("input must be non null");
         }
-        int temp = Integer.valueOf(input.substring(0, 2));
-        int x = temp / 10;
-        int y = temp % 10;
+        int x;
+        int y;
+
+        if (isNumeric(input) && input.length() >= 2) {
+            int temp = Integer.valueOf(input.substring(0, 2));
+            x = temp / 10;
+            y = temp % 10;
+        } else {
+            x = (int)(Math.random() * 9);
+            y = (int)(Math.random() * 9);
+        }
         return new Point(x, y);
     }
 
+    /**
+     * Method for checking string on
+     *
+     * @param str string contains numbers
+     * @return true - if str can be represented as a number
+     * false - if str can't be represented as a number
+     */
+    public boolean isNumeric(String str) {
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Main part of program with bulk of work

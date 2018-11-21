@@ -3,12 +3,13 @@ package com.learning.batlleship.ships.concreteships;
 import com.learning.batlleship.util.Point;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interface that must implements every ship
  */
 public interface Ship {
-    ArrayList<Point> getCoordinates();
+    List<Point> getCoordinates();
 
     /**
      * Set coordinates for a concrete ship.
@@ -16,7 +17,7 @@ public interface Ship {
      *
      * @param points ArrayList with coordinates inside
      */
-    void setCoordinates(ArrayList<Point> points);
+    void setCoordinates(List<Point> points);
 
     /**
      * Check if the ship is hit

@@ -3,25 +3,25 @@ package com.learning.batlleship.ships.concreteships;
 import com.learning.batlleship.util.Point;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class that represents basic ship
  */
 public abstract class AbstractShip implements Ship {
-    protected ArrayList<Point> points;
+    protected List<Point> points;
     protected int lives;
     protected int length;
 
     @Override
-    public ArrayList<Point> getCoordinates() {
+    public List<Point> getCoordinates() {
         return points;
     }
 
     @Override
-    public void setCoordinates(ArrayList<Point> points) {
+    public void setCoordinates(List<Point> points) {
         if (points == null) {
-            throw new IllegalArgumentException("points must exist");
-        }
+            throw new IllegalArgumentException("points must exist"); }
         this.points = points;
     }
 
